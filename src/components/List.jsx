@@ -10,6 +10,8 @@ const List = ({ todos }) => {
           return <TodoItem {...todo} key={todo.id} />;
         })}
       </div>
+
+      <div>test code 입니다</div>
     </div>
   );
 };

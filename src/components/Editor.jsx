@@ -1,12 +1,8 @@
 import './Editor.css';
-import {
-  useRef,
-  useState,
-} from 'react';
+import { useRef, useState } from 'react';
 
 const Editor = ({ onCreate }) => {
-  const [content, setContent] =
-    useState('');
+  const [content, setContent] = useState('');
   const contentRef = useRef();
 
   const onChangeContent = (e) => {
@@ -38,9 +34,7 @@ const Editor = ({ onCreate }) => {
         value={content}
         onChange={onChangeContent}
       />
-      <button onClick={onSubmit}>
-        추가
-      </button>
+      <button onClick={onSubmit}>추가</button>
     </div>
   );
 };

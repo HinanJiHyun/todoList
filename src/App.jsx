@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useRef, useReducer, useCallback } from 'react';
+import { useState, useRef, useReducer, useCallback, createContext } from 'react';
 import Header from './components/Header.jsx';
 import Editor from './components/Editor.jsx';
 import List from './components/List.jsx';
@@ -41,6 +41,11 @@ function reducer(state, action) {
   }
 }
 
+// context는 컴포넌트 외부에 선언한다
+// 외부에서 사용하기 위해 export
+export const TodoContext = createContext();
+console.log('TodoContext', TodoContext);
+
 function App() {
   const [todos, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(3);
@@ -74,8 +79,17 @@ function App() {
   return (
     <div className='App'>
       <Header />
-      <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
+      <TodoContext.Provider
+        value={{
+          todos,
+          onCreate,
+          onUpdate,
+          onDelete,
+        }}
+      >
+        <Editor />
+        <List />
+      </TodoContext.Provider>
     </div>
   );
 }
